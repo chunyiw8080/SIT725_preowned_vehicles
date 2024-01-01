@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>preowned vehicles price prediction</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+</head>
+<body>
+    <div class="indicators">
+        <form id="carIndicators" action="/valuation" method="post">
+            <!--  -->
+            <table>
+                <tr>
+                    <th>km_driven:</th>
+                    <td>
+                        <input type="text" name="km_driven">
+                        <p class="unit-info">(Unit: KM)</p>
+                    </td>               
+                </tr>
+                <tr>
+                    <th>fuel:</th>
+                    <td>
+                        <select name="fuel">
+                            <option>Diesel</option>
+                            <option>Petrol</option>
+                        </select>
+                    </td>
+                    <!--<td><input type="text" name="fuel"></td>-->
+                </tr>
+                <tr>
+                    <th>seller_type:</th>
+                    <td>
+                        <select name="seller_type">
+                            <option>Individual</option>
+                            <option>Dealer</option>
+                        </select>
+                        <!--<input type="text" name="seller_type">-->
+                    </td>
+                </tr>
+                <tr>
+                    <th>transmission:</th>
+                    <td>
+                        <select name="transmission">
+                            <option>Manual</option>
+                            <option>Automatic</option>
+                        </select>
+                        <!--<input type="text" name="transmission">-->
+                    </td>
+                </tr>
+                <tr>
+                    <th>owner:</th>
+                    <td>
+                        <select name="owner">
+                            <option>First Owner</option>
+                            <option>Second Owner</option>
+                            <option>Third Owner</option>
+                            <option>Forth & Above Owner</option>
+                        </select>
+                        <!--<input type="text" name="owner">-->
+                    </td>
+                </tr>
+                <tr>
+                    <th>mileage:</th>
+                    <td>
+                        <input type="text" name="mileage">
+                        <p class="unit-info">(Unit: kmpl)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>engine:</th>
+                    <td>
+                        <input type="text" name="engine">
+                        <p class="unit-info">(Unit: CC)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>max_power:</th>
+                    <td>
+                        <input type="text" name="max_power">
+                        <p class="unit-info">(Unit: bhp)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>torque:</th>
+                    <td>
+                        <input type="text" name="torque">
+                        <p class="unit-info">(Unit: rpm)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>seats:</th>
+                    <td><input type="text" name="seats"></td>
+                </tr>
+                <tr>
+                    <th>Submit:</th>
+                    <td><button id="submitBtn" type="submit">Submit</button></td>
+                </tr>
+                <!-- <input type="submit" value="提交"> -->
+            </table>
+        </form>
+    </div>
+    <div class="result">
+        <h1><%= result %></h1>
+    </div>
+<!-- <script type="text/javascript" src="./js/getPredictionVal.js"></script> -->
+</body>
+</html>
