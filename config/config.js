@@ -5,6 +5,6 @@
 module.exports = {
     dbHost: 'localhost',
     dbPort: '27017',
-    dbName: 'trading',
+    dbName: 'SIT725Project',
     //secret: 'sit725demo'
 }

@@ -9,6 +9,11 @@ module.exports = function(success, error){
             console.log('Unable to connect to the database');
         }
     }
+    if (typeof success !== 'function'){
+        success = function(){
+            console.log('No crud function is called');
+        }
+    }
     //Import mongoose module
     const mongoose = require('mongoose');
     //Import database configurations
@@ -18,6 +23,7 @@ module.exports = function(success, error){
 
     //set callback
     mongoose.connection.once('open', () => {
+        console.log('Connect to database');
         success();
     });
     mongoose.connection.once('error', () => {
