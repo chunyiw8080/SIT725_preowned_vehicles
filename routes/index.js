@@ -1,10 +1,10 @@
-const { exec } = require('child_process');
 const express = require('express');
+const path = require('path');
 
 const router = express.Router();
 
 router.get('/', (req,res) => {
-    res.render('index');
+    res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'index.html'));
 });
 
 module.exports = router;

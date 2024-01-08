@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="indicators">
-        <form id="carIndicators" action="/valuation" method="post">
+        <form id="carIndicators">
             <!--  -->
             <table>
                 <tr>
@@ -93,15 +93,13 @@
                 </tr>
                 <tr>
                     <th>Submit:</th>
-                    <td><button id="submitBtn" type="submit">Submit</button></td>
+                    <td><button id="submitBtn">Submit</button></td>
                 </tr>
                 <!-- <input type="submit" value="提交"> -->
             </table>
         </form>
     </div>
-    <div class="result">
-        <h1><%= result %></h1>
-    </div>
-<!-- <script type="text/javascript" src="./js/getPredictionVal.js"></script> -->
+    <div id="result"></div>
+    <script src="/javascripts/valuation.js"></script>
 </body>
 </html>
