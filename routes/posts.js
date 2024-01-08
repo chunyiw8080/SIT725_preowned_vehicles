@@ -12,7 +12,7 @@ const timezone = config.timezone;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, __dirname + '/../public/userUploads') // 上传文件存储的路径
+        cb(null, __dirname + '/../public/userUploads') // images storage path
     },
     filename: function (req, file, cb) {
       // Get file suffix name

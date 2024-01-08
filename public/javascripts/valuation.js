@@ -3,7 +3,7 @@ const result = document.getElementById('result');
 const myForm = document.getElementById('carIndicators');
 
 btn.onclick = function(e){
-    e.preventDefault(); // 阻止表单的默认提交行为
+    e.preventDefault(); 
 
     var formData = new FormData(myForm);
     var formDataObj = Object.fromEntries(formData.entries());
