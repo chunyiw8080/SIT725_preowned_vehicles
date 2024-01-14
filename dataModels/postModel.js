@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 //user object structure, basic structure for user table in the database.
 let postSchema = new mongoose.Schema({
     status: {type: Number, enum: [0,1], required: true},
-    
+
     car_model: {type: String, required: true},
     year: {type: Number, required: true},
     price: {type: Number, required: true},
@@ -38,11 +38,11 @@ let postSchema = new mongoose.Schema({
     content: {type: String, required: true},
     image: {type: [], required: true},
     poster_name: {type: String, required: true},
-    poster_uuid: {type: String, required: true},
+    uuid: {type: String, required: true},
     post_date: {type: Date, requied: true},
     contact: {type: String},
 
-    uuid: {type: String, required: true}
+    
 
 });
 

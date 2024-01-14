@@ -20,7 +20,7 @@ async function register(req, res, next){
 
 function login(req, res, next){
     if(req.session){
-        return res.redirect('/users/login');
+        return res.status(403).send('Not login');
     }else{
         next();
     }

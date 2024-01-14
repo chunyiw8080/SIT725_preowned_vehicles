@@ -36,6 +36,7 @@ router.post('/login', async (req, res) => {
       //create session for users
       req.session.username = data.username;
       req.session.uuid = data.uuid;
+      console.log(req.body);
       return res.status(200).send('Login Successfully');
     }
   }catch(err){
@@ -57,20 +58,23 @@ router.post('/register', authentication.register, async (req, res) => {
   console.log(req.body);
   //take email as default username
   let username = req.body.username;
-  username ? username : req.body.email;
+  username = username ? username : req.body.email;
   let uuid = uuidv4();
   try{
     let now = new Date();
     const data = await db.createNewRecord(model, {...req.body, username: username, password: md5(req.body.password), uuid: uuid, reg_date: moment(now).toDate()});
     console.log('reg data: ', data);
+    return res.status(200).send('Success');
   }catch(err){
     console.log(err);
     res.status(500).send("Internal server error");
   }
 });
 
-router.get('/profile', async function(req, res){
-  
+router.get('/profile', authentication.login, async function(req, res){
+  let uuid = req.session.uuid;
+  const data = await db.findRecords(model, {uuid: uuid}, model.findOne, null);
+  return res.status(200).send(data);
 });
 
 

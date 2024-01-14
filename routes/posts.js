@@ -60,6 +60,7 @@ router.post('/new', authentication.login, upload.array('image', 10), async funct
             ...req.body, // general form data
             status: 1,
             post_date: moment.tz(now, timezone).toDate(), //current date and time
+            poster_name: req.session.username,   
             uuid: req.session.uuid,
             image: urls // array to store image url
         };
@@ -89,14 +90,14 @@ router.get('/:id', async function(req, res){
     }
 });
 
-router.delete('/:id', async function(req, res){
+router.delete('/:id', authentication.login, async function(req, res){
     let uuid = req.session.uuid;
     let id = req.params.id;
 
     try{
         const data = db.findRecords(model, {_id: id, uuid: uuid}, model.findOne, null);
         if(data){
-            const del = db.updateRecords(model, {_id: id, uuid: uuid}, model.updateOne, {status: 0});
+            const del = await db.updateRecords(model, {_id: id, uuid: uuid}, model.updateOne, {status: 0});
             console.log(del);
             return res.status(200).send("Post has been deleted");
         }else{
