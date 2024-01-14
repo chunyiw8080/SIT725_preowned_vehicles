@@ -19,7 +19,7 @@ async function register(req, res, next){
 };
 
 function login(req, res, next){
-    if(req.session){
+    if(!req.session){
         return res.status(403).send('Not login');
     }else{
         next();
