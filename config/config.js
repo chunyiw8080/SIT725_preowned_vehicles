@@ -6,6 +6,6 @@ module.exports = {
     dbHost: 'localhost',
     dbPort: '27017',
     dbName: 'SIT725Project',
-    timezone: 'Australia/Melbourne'
-    //secret: 'sit725demo'
+    timezone: 'Australia/Melbourne',
+    secret: 'sit725demo'
 }

@@ -4,7 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
+const session = require('express-session');
+const mongoStore = require('connect-mongo');
 
+const {dbHost, dbPort, dbName, secret} = require('./config/config');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var valuationRouter = require('./routes/valuation');
@@ -15,6 +18,16 @@ var app = express();
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
+
+//session configuration
+app.use(session({
+  name: 'sid', 
+  secret: `${secret}`, 
+  saveUninitialized: false, 
+  resave: true, 
+  store: mongoStore.create({mongoUrl: `mongodb://${dbHost}:${dbPort}/${dbName}`}),
+  cookie: {httpOnly: true, maxAge: 1000 * 60 * 60} 
+}));
 
 app.use(cors());
 app.use(logger('dev'));
