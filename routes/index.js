@@ -11,4 +11,8 @@ router.get('/chat', (req,res) => {
     res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'chat.html'));
 });
 
+router.get('/success', (req, res) => {
+    res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'hint.html'));
+})
+
 module.exports = router;

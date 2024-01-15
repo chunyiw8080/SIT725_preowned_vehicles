@@ -41,9 +41,10 @@ router.get('/', async function(req,res){
 /**
  * router for user to crearte new post
  * upload.array: 10 images maximum to be uploaded
- */
-router.post('/new', authentication.login, upload.array('image', 10), async function(req, res) {
+ */ //authentication.login,
+router.post('/new',  upload.array('image', 10), async function(req, res) {
     console.log('files: ', req.files);
+    console.log('req.body: ', req.body);
   
     try {
         const now = new Date();
@@ -108,7 +109,11 @@ router.delete('/:id', authentication.login, async function(req, res){
         return res.status(500).send("Internal Server Error");
     }
     
-})
+});
+
+router.patch('/:id', async function(req, res){
+
+});
 
 
 module.exports = router;

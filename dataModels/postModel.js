@@ -37,8 +37,8 @@ let postSchema = new mongoose.Schema({
     title: {type: String, required: true},
     content: {type: String, required: true},
     image: {type: [], required: true},
-    poster_name: {type: String, required: true},
-    uuid: {type: String, required: true},
+    // poster_name: {type: String, required: true},
+    // uuid: {type: String, required: true},
     post_date: {type: Date, requied: true},
     contact: {type: String},
 
