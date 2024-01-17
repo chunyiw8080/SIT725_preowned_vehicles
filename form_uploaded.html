@@ -22,12 +22,16 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 800px; /* Adjust the width as needed */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+            margin: auto;
         }
 
         label {
             display: block;
-            margin-bottom: px;
+            margin-bottom: 8px;
         }
 
         input,
@@ -55,7 +59,6 @@
             background-color: #45a049;
         }
 
-        
         .preview-image {
             max-width: 100%;
             height: auto;
@@ -67,44 +70,108 @@
 <body>
 
     <form action="/submit_form" method="post">
-        <label for="carMake">Car Maker</label>
-        <select id="carMake" name="carMake" required>
-            <option value="" disabled selected>Select a Car Maker</option>
-        </select>
+        
+        <div>
+            <label for="carMake">Car Maker</label>
+            <select id="carMake" name="carMake" required>
+                <option value="" disabled selected>Select a car make</option>
+                
+            </select>
 
-        <label for="carModel">Car Model</label>
-        <select id="carModel" name="carModel" required>
-            <option value="" disabled selected>Select a Car Model</option>
-        </select>
+            <label for="carModel">Car Model:</label>
+            <select id="carModel" name="carModel" required>
+                <option value="" disabled selected>Select a car model</option>
+                
+            </select>
 
-        <label for="year">Year</label>
-        <select id="year" name="year" required>
-            <option value="" disabled selected>Select a year</option>
+            <label for="year">Year:</label>
+            <select id="year" name="year" required>
+                <option value="" disabled selected>Select a year</option>
+                
+            </select>
+
+            <label for="km">KM:</label>
+            <input type="number" id="km" name="km" required>
+
+            <label for="rego">Rego:</label>
+            <input type="text" id="rego" name="rego" pattern="[A-Za-z0-9]+" required>
+
+            <label for="postCode">Post Code:</label>
+            <input type="number" id="postCode" name="postCode" pattern="\d{4}" maxlength="4" required>
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" required>
+
+        </div>
+
+       
+        <div>
+    
+            <label for="seatingCapacity">Seating Capacity:</label>
+            <select id="seatingCapacity" name="seatingCapacity" required>
+                <option value="" disabled selected>Select seating capacity</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+            </select>
+
+            <label for="fuelType">Fuel Type:</label>
+            <select id="fuelType" name="fuelType" required>
+                <option value="" disabled selected>Select fuel type</option>
+                <option value="petrol">Petrol</option>
+                <option value="diesel">Diesel</option>
+                <option value="lpg">LPG</option>
+                <option value="electric">Electric</option>
+            </select>
+
+            <label for="transmission">Transmission:</label>
+            <select id="transmission" name="transmission" required>
+                <option value="" disabled selected>Select transmission type</option>
+                <option value="auto">Auto</option>
+                <option value="manual">Manual</option>
+            </select>
+
+            <label for="maxPower">Max Power:</label>
+            <input type="number" id="maxPower" name="maxPower" required>
+
+            <label for="torque">Torque:</label>
+            <input type="number" id="torque" name="torque" required>
+
+            <label for="sellerType">Seller Type:</label>
+            <select id="sellerType" name="sellerType" required>
+                <option value="" disabled selected>Select seller type</option>
+                <option value="individual">Individual</option>
+                <option value="dealer">Dealer</option>
+            </select>
+
+            <label for="owner">Owner:</label>
+            <select id="owner" name="owner" required>
+                <option value="" disabled selected>Select owner</option>
+                <option value="first">First</option>
+                <option value="second">Second</option>
+                <option value="third">Third</option>
+                <option value="fourth_and_above">Fourth and above</option>
+            </select>
+          
+        </div>
+
+        
+        <div style="grid-column: span 2;">
             
-        </select>
+            <div id="imagePreviewContainer"></div>
+            <label for="photos">Upload Photos:</label>
+            <input type="file" id="photos" name="photos[]" accept="image/*" multiple onchange="previewImages(this)">
+        </div>
 
-        <label for="km">KMs</label>
-        <input type="number" id="km" name="km" required>
-
-        <label for="rego">Rego Details</label>
-        <input type="text" id="rego" name="rego" pattern="[A-Za-z0-9]+" required>
-
-        <label for="postCode">Post Code:</label>
-        <input type="number" id="postCode" name="postCode" pattern="\d{4}" maxlength="4" required>
-
-        <div id="imagePreviewContainer"></div>
-
-        <label for="photos">Upload Photos:</label>
-        <input type="file" id="photos" name="photos[]" accept="image/*" multiple onchange="previewImages(this)">
-
-        <button type="submit" class="submit-btn"> Get An Instant Offer</button>
+        <button type="submit" class="submit-btn"> Get An Instant Offer Submit</button>
     </form>
 
     <script>
+   
         const carData = {
             "Toyota": ["Camry", "Corolla", "Hilux", "Land Cruiser", "RAV4", "Yaris"],
             "Ford": ["Everest", "Fiesta", "Focus", "Mustang", "Ranger"],
-            "Holden": ["Commodore", "SV6","SS"],
+            "Holden": ["Commodore","SV6","SSV"], 
             "Honda": ["Accord", "Civic", "CR-V", "HR-V"],
             "Mazda": ["CX-3", "CX-5", "Mazda2", "Mazda3", "MX-5"],
             "Hyundai": ["Accent", "Elantra", "i30", "Kona", "Santa Fe", "Tucson"],
@@ -173,7 +240,6 @@
 
             carModelSelect.innerHTML = '<option value="" disabled selected>Select a car model</option>';
 
-            
             models.forEach(model => {
                 const option = document.createElement('option');
                 option.value = model;
@@ -182,17 +248,13 @@
             });
         });
 
-        
         carModelSelect.addEventListener('change', function () {
             const selectedCarModel = this.value;
 
-            
             yearSelect.disabled = false;
 
-            
             yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
 
-            
             for (let year = 2024; year >= 1980; year--) {
                 const option = document.createElement('option');
                 option.value = year;
@@ -201,7 +263,6 @@
             }
         });
 
-        
         function previewImages(input) {
             const previewContainer = document.getElementById('imagePreviewContainer');
             previewContainer.innerHTML = ''; 
