@@ -74,9 +74,7 @@
                     <div class="col-md-7">
                         <div class="input-group news-input">
                             <input type="email" id="emailInput" class="form-control form-control-lg" placeholder="Your email" />
-                            <a href="/public/html/registration.html" onclick="passEmail()">
-                                <button class="btn btn-dark btn-lg">Register</button>
-                            </a>
+                            <button class="btn btn-dark btn-lg" onclick="passEmail()">Register</button>
                         </div>
                     </div>
                 </div>
@@ -84,11 +82,9 @@
         
             <script>
                 function passEmail() {
-                    // Get the value from the email input field
                     var emailValue = document.getElementById('emailInput').value;
-        
-                    // Redirect to the registration page with the email as a URL parameter
-                    window.location.href = "/public/html/registration.html?email=" + encodeURIComponent(emailValue);
+                    var encodedEmail = encodeURIComponent(emailValue);
+                    window.location.href = "/public/html/registration.html?email=" + encodedEmail;
                 }
             </script>
         </section>
