@@ -7,15 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Auto sell</title>
     <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous"
-        />
-        <link rel="stylesheet" href="/stylesheets/style.css" />
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script>
+        function populateEmail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const emailValue = urlParams.get('email');
+            document.getElementById('email').value = emailValue || '';
+        }
+    </script>
 </head>
 
-<body>
+<body onload="populateEmail()">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
         <div class="container">
             <a href="#" class="navbar-brand">
@@ -28,7 +35,7 @@
                 data-bs-toggle="collapse"
                 data-bs-target="#navmenu"
             >
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navmenu">
@@ -96,6 +103,7 @@
             <button type="submit" class="btn btn-primary" id="submit">Sign Up</button>
         </div>
     </form>
+
 </body>
 
 </html>
