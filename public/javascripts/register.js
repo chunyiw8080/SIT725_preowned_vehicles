@@ -9,7 +9,6 @@ document.getElementById('register_form').addEventListener('submit', function(e){
     });
     dataObj.password = encryptedPasswd;
     var data = JSON.stringify(dataObj);
-    console.log(data);
 
     fetch('/users/register', {
         method: 'POST',

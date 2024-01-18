@@ -1,7 +1,6 @@
 /** Imported modules */
 const express = require('express');
 const moment = require('moment-timezone');
-const md5 = require('md5');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
@@ -33,8 +32,7 @@ router.get('/login', (req, res) => {
  */
 router.post('/login', async (req, res) => {
   try{
-    let password = md5(req.body.password);
-    const data = await db.findRecords(model, {username: req.body.username, password: password}, model.findOne, null);
+    const data = await db.findRecords(model, {username: req.body.username, password: req.body.password}, model.findOne, null);
     if(!data){
       return res.status(400).send('Incorrect username or password');
     }else{
@@ -48,9 +46,7 @@ router.post('/login', async (req, res) => {
     console.log(err);
     return res.status(500).send("Internal Server Error");
   }
-  
 });
-
 
 /**
  * User registration 
@@ -71,7 +67,7 @@ router.post('/register', authentication.register, async (req, res) => {
   let uuid = uuidv4();
   try{
     let now = new Date();
-    const data = await db.createNewRecord(model, {...req.body, username: username, password: md5(req.body.password), uuid: uuid, reg_date: moment(now).toDate()});
+    const data = await db.createNewRecord(model, {...req.body, username: username, password: req.body.password, uuid: uuid, reg_date: moment(now).toDate()});
     console.log('reg data: ', data);
     return res.status(200).send('Success');
   }catch(err){
@@ -89,5 +85,17 @@ router.get('/profile', authentication.login, async function(req, res){
   return res.status(200).send(data);
 });
 
+router.post('/logout', authentication.login, function(req, res){
+  try{
+    req.session.destroy();
+    if(!req.session){
+      return res.status(205).send("Logout");
+    }
+  }catch(err){
+    console.log(err);
+    res.status(500).send('Internal Server Error');
+  }
+  
+});
 
 module.exports = router;
