@@ -1,7 +1,7 @@
 /**
  *  This is the configuration for the project, including database connection config, secret used to encrypt session, etc.
+ *  secret: Session encryption key
  */
-
 module.exports = {
     dbHost: 'localhost',
     dbPort: '27017',

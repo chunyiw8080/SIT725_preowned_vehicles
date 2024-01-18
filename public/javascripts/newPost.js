@@ -1,3 +1,7 @@
+/**
+ * Read form data and send to back end
+ * Once a positive result received(status code 200), render the hint page
+ */
 document.getElementById('post_form').addEventListener('submit', function(e) {
     e.preventDefault();
 

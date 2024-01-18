@@ -1,3 +1,4 @@
+/** Imported Modules */
 const { exec } = require('child_process');
 const express = require('express');
 const path = require('path');
@@ -5,6 +6,9 @@ const path = require('path');
 var router = express.Router();
 const scriptPath = path.join(__dirname, '..', 'public', 'python', 'app', 'prediction.py');
 
+/**
+ * Generate a child process to execute python script to get prediction price and return to front-end
+ */
 router.post('/', (req, res) => {
     const formData = req.body;
     console.log(formData);

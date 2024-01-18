@@ -26,6 +26,11 @@ router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'login.html'));
 });
 
+/**
+ * Receive login requests from the front-end
+ * Once successfully logged in, set the session for the user, which contains username and uuid
+ * Session will be used to verify the user's permission to perform specific operations throuth verification middleware
+ */
 router.post('/login', async (req, res) => {
   try{
     let password = md5(req.body.password);
@@ -54,9 +59,13 @@ router.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'registration.html'));
 });
 
+/**
+ * Accept registration requests from the front-end and parse the registration form
+ * If username is not provided, take email as default username
+ * Randmonly generate a uuid for new user
+ */
 router.post('/register', authentication.register, async (req, res) => {
   console.log(req.body);
-  //take email as default username
   let username = req.body.username;
   username = username ? username : req.body.email;
   let uuid = uuidv4();
@@ -71,6 +80,9 @@ router.post('/register', authentication.register, async (req, res) => {
   }
 });
 
+/**
+ * Get user profile after verifying login status through session
+ */
 router.get('/profile', authentication.login, async function(req, res){
   let uuid = req.session.uuid;
   const data = await db.findRecords(model, {uuid: uuid}, model.findOne, null);

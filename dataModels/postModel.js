@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
-//user object structure, basic structure for user table in the database.
+/**
+ * Basic structure for post
+ * status: 1 - deleted | 0 - normal, posts with status code 1 will not be showd.
+ */
 let postSchema = new mongoose.Schema({
     status: {type: Number, enum: [0,1], required: true},
 

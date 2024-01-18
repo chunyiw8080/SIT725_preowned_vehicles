@@ -1,6 +1,10 @@
 const db = require('../db/crud');
 const model = require('../dataModels/userModel');
 
+/**
+ * Middleware for verifying whether phone and email have been used for registration
+ * If false, transfer control to a function
+ */
 async function register(req, res, next){
     let email = req.body.email;
     let phone = req.body.phone;
@@ -18,6 +22,9 @@ async function register(req, res, next){
     }
 };
 
+/**
+ * Middleware for verifying user login status
+ */
 function login(req, res, next){
     if(!req.session){
         return res.status(403).send('Not login');

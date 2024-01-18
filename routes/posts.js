@@ -1,8 +1,10 @@
+/** Imported modules */
 const express = require('express');
 const multer = require('multer');
 const moment = require('moment-timezone');
 const path = require('path');
 
+/** Imported files */
 const db = require('../db/crud');
 const model = require('../dataModels/postModel');
 const router = express.Router();
@@ -13,7 +15,8 @@ const timezone = config.timezone;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, __dirname + '/../public/userUploads') // images storage path
+        // Define file upload path
+        cb(null, __dirname + '/../public/userUploads') 
     },
     filename: function (req, file, cb) {
       // Get file suffix name
@@ -38,10 +41,12 @@ router.get('/', async function(req,res){
         return res.status(500).send("Internal Server Error");
     }
 });
+
 /**
- * router for user to crearte new post
+ * Router for user to crearte new post
  * upload.array: 10 images maximum to be uploaded
- */ //authentication.login,
+ * Images will be upload to the local folder: /public/userUploads, once successfully upload, the images' url will be store in the DB.
+ */ 
 router.post('/new',  upload.array('image', 10), async function(req, res) {
     console.log('files: ', req.files);
     console.log('req.body: ', req.body);
@@ -91,6 +96,10 @@ router.get('/:id', async function(req, res){
     }
 });
 
+/**
+ * Posts delete
+ * Verify user permissions through session, if pass, mark posts status as 1, which will not be showd on post list
+ */
 router.delete('/:id', authentication.login, async function(req, res){
     let uuid = req.session.uuid;
     let id = req.params.id;
