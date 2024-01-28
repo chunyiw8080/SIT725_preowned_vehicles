@@ -30,6 +30,7 @@ router.post('/', (req, res) => {
     // Read python output
     pythonProcess.stdout.on('data', function(data){
         const result = data.toString();
+        console.log('result: ', result);
         return res.send(result);
     });
     
@@ -40,7 +41,7 @@ router.post('/', (req, res) => {
 })
 
 router.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'valuation.html'));
+    res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'form_uploaded.html'));
 });
 
 module.exports = router;

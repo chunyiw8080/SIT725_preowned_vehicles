@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #c7e9e9;
+        }
+        h1 {
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 60%;
+            max-width: 800px;
+        }
+        .contact-info {
+            max-width: 300px;
+            padding: 20px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #8d8c8c;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div class="container">
+    <div class="contact-info">
+        <h2>Contact Information</h2>
+        <p>Office Address: Deakin University, Australia</p>
+        <p>Postal Address: Locker Bag 0000, Australia</p>
+        <p>Contact No: 0000000000</p>
+        <p>Opening Hours:</p>
+        <ul>
+            <li><strong>Monday:</strong> 9 AM to 6 PM</li>
+            <li><strong>Tuesday:</strong> 9 AM to 6 PM</li>
+            <li><strong>Wednesday:</strong> 9 AM to 8 PM</li>
+            <li><strong>Thursday:</strong> 9 AM to 6 PM</li>
+            <li><strong>Friday:</strong> 9 AM to 5 PM</li>
+            <li><strong>Saturday:</strong> Email only</li>
+            <li><strong>Sunday:</strong> Email only</li>
+        </ul>
+    </div>
+
+    <form>
+        <h2>Contact Us</h2>
+
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="mobile">Your Mobile Number</label>
+        <input type="tel" id="mobile" name="mobile" required>
+
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
