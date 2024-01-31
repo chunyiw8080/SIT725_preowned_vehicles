@@ -1,26 +1,28 @@
 const btn = document.getElementById('submitBtn');
 const result = document.getElementById('result');
 const myForm = document.getElementById('carIndicators');
+var price;
 
 if(btn){
     btn.onclick = function(e){
         e.preventDefault(); 
     
         var formData = new FormData(myForm);
-        console.log(formData);
         var formDataObj = Object.fromEntries(formData.entries());
-        var formDataJsonString = JSON.stringify(formDataObj);
+        formDataJsonString = JSON.stringify(formDataObj);
         console.log(formDataJsonString);
     
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://127.0.0.1:3000/valuation');
         xhr.setRequestHeader('Content-Type', 'application/json');
-        console.log(formDataJsonString);
         xhr.send(formDataJsonString);
         xhr.onreadystatechange = function(){
             if(xhr.readyState === 4){
                 if(xhr.status >= 200 && xhr.status <= 304){
-                    result.innerHTML = `<h2>Estimated price: ${xhr.response}</h2>`;
+                    price = xhr.response;
+                    result.innerHTML = `<h2>Estimated price: ${price}</h2>`;
+                    let btnContainer = document.getElementById('postnow');
+                    btnContainer.innerHTML = `<button type="button" class="btn btn-primary" id="jumpBtn">Post Now!</button>`
                 } else {
                     result.innerHTML = `<h1>Error: ${xhr.statusText}</h1>`;
                 }
@@ -30,3 +32,21 @@ if(btn){
 }else{
     console.log('null');
 }
+
+const jumpBtnContainer = document.getElementById('postnow');
+jumpBtnContainer.addEventListener('click', function(event){
+    if(event.target.id === 'jumpBtn'){
+        try{
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://127.0.0.1:3000/editor/data');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            let formPreset = JSON.parse(formDataJsonString);
+            formPreset.price = price;
+            xhr.send(JSON.stringify(formPreset));
+            window.location.href = 'http://127.0.0.1:3000/editor'; 
+        }catch(err){
+            console.error(err);
+        }
+        
+    } 
+});

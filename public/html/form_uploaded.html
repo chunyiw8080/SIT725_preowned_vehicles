@@ -131,7 +131,7 @@
             <input type="number" name="max_power" required>
 
             
-
+            
         </div>
 
        
@@ -180,139 +180,13 @@
             </select>
 
             <div id="result"></div>
+            <div id="postnow"></div>
           
         </div>
-
-        
-        <!-- <div style="grid-column: span 2;">
-            
-            <div id="imagePreviewContainer"></div>
-            <label for="photos">Upload Photos:</label>
-            <input type="file" id="photos" name="photos[]" accept="image/*" multiple onchange="previewImages(this)">
-        </div> -->
-        
         
         <button type="button" class="btn btn-primary" id="submitBtn">Get An Instant Offer Submit</button>
+        
     </form>
-    
-
-    <!-- <script>
-   
-        const carData = {
-            "Toyota": ["Camry", "Corolla", "Hilux", "Land Cruiser", "RAV4", "Yaris"],
-            "Ford": ["Everest", "Fiesta", "Focus", "Mustang", "Ranger"],
-            "Holden": ["Commodore","SV6","SSV"], 
-            "Honda": ["Accord", "Civic", "CR-V", "HR-V"],
-            "Mazda": ["CX-3", "CX-5", "Mazda2", "Mazda3", "MX-5"],
-            "Hyundai": ["Accent", "Elantra", "i30", "Kona", "Santa Fe", "Tucson"],
-            "Volkswagen": ["Golf", "Passat", "Polo", "Tiguan", "Touareg"],
-            "BMW": ["1 Series", "3 Series", "5 Series", "X1", "X3", "X5"],
-            "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "GLC", "GLE", "S-Class"],
-            "Subaru": ["Forester", "Impreza", "Outback", "XV"],
-            "Nissan": ["Altima", "GT-R", "Navara", "Qashqai", "X-Trail"],
-            "Mitsubishi": ["ASX", "Eclipse Cross", "Outlander", "Pajero Sport", "Triton"],
-            "Kia": ["Cerato", "Optima", "Seltos", "Sorento", "Sportage", "Stinger"],
-            "Audi": ["A3", "A4", "Q5", "Q7", "TT"],
-            "Volvo": ["S60", "S90", "V40", "XC40", "XC60", "XC90"],
-            "Jaguar": ["E-PACE", "F-PACE", "I-PACE", "XE", "XF", "XJ"],
-            "Land Rover": ["Defender", "Discovery", "Range Rover", "Range Rover Evoque", "Range Rover Sport"],
-            "Lexus": ["ES", "IS", "LX", "NX", "RX", "UX"],
-            "Porsche": ["911", "Cayenne", "Macan", "Panamera", "Taycan"],
-            "Alfa Romeo": ["Giulia", "Stelvio"],
-            "Fiat": ["500", "500X", "500C"],
-            "Jeep": ["Cherokee", "Grand Cherokee", "Renegade", "Wrangler"],
-            "Skoda": ["Fabia", "Kamiq", "Karoq", "Octavia", "Superb"],
-            "Mini": ["3-Door Hatch", "5-Door Hatch", "Clubman", "Countryman"],
-            "Tesla": ["Model 3", "Model S", "Model X", "Model Y"],
-            "Suzuki": ["Baleno", "Ignis", "Jimny", "Swift", "Vitara"],
-            "Peugeot": ["2008", "208", "3008", "308", "5008"],
-            "Renault": ["Captur", "Koleos", "Megane", "Trafic"],
-            "Isuzu": ["D-MAX", "MU-X"],
-            "Great Wall Motors": ["Cannon", "Steed"],
-            "Mahindra": ["Pik-Up"],
-            "SsangYong": ["Korando", "Musso", "Rexton"],
-            "Opel": ["Astra", "Crossland X"],
-            "Infiniti": ["Q50", "Q60", "QX50", "QX80"],
-            "Citroën": ["C3", "C4 Cactus", "C5 Aircross", "Grand C4 SpaceTourer"],
-            "DS Automobiles": ["DS 3 Crossback", "DS 7 Crossback"],
-            "MG Motor": ["MG 3", "MG ZS", "MG HS"],
-            "Haval": ["H2", "H6", "H9"],
-            "Ram Trucks": ["1500"],
-            "LDV": ["D90", "G10", "T60"],
-            "Foton": ["Sauvana"],
-            "Proton": ["Exora", "Jumbuck", "Persona", "Saga"],
-            "Genesis": ["G70", "G80", "G90"],
-            "Maserati": ["Ghibli", "Levante", "Quattroporte"],
-            "Bentley": ["Bentayga", "Continental GT", "Flying Spur"],
-            "Aston Martin": ["DB11", "DBS Superleggera", "Vantage"],
-            "McLaren": ["540C", "570GT", "600LT", "720S"],
-            "Rolls-Royce": ["Cullinan", "Dawn", "Ghost", "Phantom", "Wraith"],
-            "Ferrari": ["488 GTB", "488 Pista", "812 Superfast", "F8 Tributo", "Portofino", "Roma"],
-            "Lamborghini": ["Aventador", "Huracan", "Urus"]
-        };
-
-        const carMakeSelect = document.getElementById('carMake');
-        const carModelSelect = document.getElementById('carModel');
-        const yearSelect = document.getElementById('year');
-
-        
-        Object.keys(carData).forEach(carMaker => {
-            const option = document.createElement('option');
-            option.value = carMaker;
-            option.text = carMaker;
-            carMakeSelect.appendChild(option);
-        });
-
-        
-        carMakeSelect.addEventListener('change', function () {
-            const selectedCarMaker = this.value;
-            const models = carData[selectedCarMaker] || [];
-
-            carModelSelect.innerHTML = '<option value="" disabled selected>Select a car model</option>';
-
-            models.forEach(model => {
-                const option = document.createElement('option');
-                option.value = model;
-                option.text = model;
-                carModelSelect.appendChild(option);
-            });
-        });
-
-        carModelSelect.addEventListener('change', function () {
-            const selectedCarModel = this.value;
-
-            yearSelect.disabled = false;
-
-            yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
-
-            for (let year = 2024; year >= 1980; year--) {
-                const option = document.createElement('option');
-                option.value = year;
-                option.text = year;
-                yearSelect.appendChild(option);
-            }
-        });
-
-        function previewImages(input) {
-            const previewContainer = document.getElementById('imagePreviewContainer');
-            previewContainer.innerHTML = ''; 
-
-            const files = input.files;
-
-            for (const file of files) {
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.classList.add('preview-image');
-                    previewContainer.appendChild(img);
-                };
-
-                reader.readAsDataURL(file);
-            }
-        }
-    </script> -->
     <script src="/javascripts/valuation.js"></script>
 </body>
 

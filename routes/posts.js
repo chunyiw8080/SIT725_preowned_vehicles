@@ -28,18 +28,24 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 /**
- * Page to list all posts
+ * Receive front-end requests and return all post data
  */
-router.get('/', async function(req,res){
+router.get('/getallposts', async function(req,res){
     try{
         let sort = req.body.sort ? req.body.sort : -1;
         const data = await db.findRecords(model, {status: 1}, model.find, {post_date: sort});
-        
-        return res.send(data);
+        return res.json(data);
     }catch(err){
         console.log(err);
         return res.status(500).send("Internal Server Error");
     }
+});
+
+/**
+ * Page to show all posts
+ */
+router.get('/',(req, res) => {
+    res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'allposts.html'));
 });
 
 /**
