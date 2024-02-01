@@ -14,7 +14,6 @@ router.post('/data', (req, res) => {
 });
 
 router.get('/data', (req, res) => {
-    console.log(formData);
     return res.send(formData);
 })
 

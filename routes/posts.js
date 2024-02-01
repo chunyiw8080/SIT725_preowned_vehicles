@@ -10,6 +10,7 @@ const model = require('../dataModels/postModel');
 const router = express.Router();
 const config = require('../config/config');
 const authentication = require('../middleware/authentication');
+const postVerfication = require('../middleware/postverification');
 
 const timezone = config.timezone;
 
@@ -104,21 +105,15 @@ router.get('/:id', async function(req, res){
 
 /**
  * Posts delete
- * Verify user permissions through session, if pass, mark posts status as 1, which will not be showd on post list
+ * Verify user permissions through middleware function, if pass, mark posts status as 1, which will not be showd on post list
  */
-router.delete('/:id', authentication.login, async function(req, res){
+router.delete('/:id', postVerfication, async function(req, res){
     let uuid = req.session.uuid;
     let id = req.params.id;
-
     try{
-        const data = db.findRecords(model, {_id: id, uuid: uuid}, model.findOne, null);
-        if(data){
-            const del = await db.updateRecords(model, {_id: id, uuid: uuid}, model.updateOne, {status: 0});
-            console.log(del);
-            return res.status(200).send("Post has been deleted");
-        }else{
-            return res.status(403).send("Invalid Operation");
-        }
+        const del = await db.updateRecords(model, {_id: id, uuid: uuid}, model.updateOne, {status: 0});
+        console.log(del);
+        return res.status(200).send("Post has been deleted");
     }catch(err){
         console.log(err);
         return res.status(500).send("Internal Server Error");
@@ -126,6 +121,11 @@ router.delete('/:id', authentication.login, async function(req, res){
     
 });
 
+/**
+ * Allow user to update their post.
+ * Get current post data and return to the editor.
+ * -------------------- (Use verfication middleware after frontend page is done) ------------------------
+ */
 router.patch('/:id', async function(req, res){
 
 });

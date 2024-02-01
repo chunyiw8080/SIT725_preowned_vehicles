@@ -22,15 +22,16 @@ document.addEventListener('DOMContentLoaded',function(){
         }
 
         cardsContainer.innerHTML = data.map((card, index) => {
+            const imageUrl = card.image[0] ? card.image[0] : '/userUploads/car.jpg';
             return `
                 <div class="card" data-index=${index}>
-                    <img src="${card.image[0]}" alt="Car Image">
+                    <img src="${imageUrl}" alt="Car Image" style="width: 400px; height: 300px; object-fit: cover;}">
                     <div class="card-info">
                         <h2>${card.car_model}</h2>
                         <p><strong>Year:</strong> ${card.year}</p>
                         <p><strong>Fuel Type:</strong> ${card.fuel}</p>
-                        <p><strong>Transmission:</strong>${card.transmission}</p>
-                        <p><strong>Seating Capacity:</strong> ${card.seats}</p>
+                        <p><strong>Transmission:</strong> ${card.transmission}</p>
+                        <p><strong>Seating Capacity: </strong> ${card.seats}</p>
                         <p><strong>Price:</strong> ${card.price}</p>
                         <p><strong>Owner:</strong> ${card.owner}</p>
                         <button class="more-info">More Info</button>
@@ -239,29 +240,29 @@ function getBase64Image(file) {
         };
     });
 }
-let cardHtml;
-function renderCards() {
-    const cardsContainer = document.querySelector('.cards-container');
-     cardHtml = data.map((card,index) => {
-        const imgSrc = card.photos.startsWith('data:') ? card.photos : `data:image/jpeg;base64,${card.photos}`;
-        return `
-            <div class="card" data-index=${index}>
-                <img src="${imgSrc}" alt="Car Image">
-                <div class="card-info">
-                    <h2>${card.carMake}</h2>
-                    <p><strong>Year:</strong> ${card.year}</p>
-                    <p><strong>Fuel Type:</strong> ${card.fuelType}</p>
-                    <p><strong>Transmission:</strong>${card.transmission}</p>
-                    <p><strong>Seating Capacity:</strong> ${card.seatingCapacity}</p>
-                    <p><strong>Price:</strong> ${card.price}</p>
-                    <p><strong>Owner:</strong> ${card.owner}</p>
-                    <button class="more-info">More Info</button>
-                </div>
-            </div>
-        `;
-    }).join('');
-    cardsContainer.innerHTML = cardHtml;
-}
+// let cardHtml;
+// function renderCards() {
+//     const cardsContainer = document.querySelector('.cards-container');
+//      cardHtml = data.map((card,index) => {
+//         const imgSrc = card.photos.startsWith('data:') ? card.photos : `data:image/jpeg;base64,${card.photos}`;
+//         return `
+//             <div class="card" data-index=${index}>
+//                 <img src="${imgSrc}" alt="Car Image">
+//                 <div class="card-info">
+//                     <h2>${card.carMake}</h2>
+//                     <p><strong>Year:</strong> ${card.year}</p>
+//                     <p><strong>Fuel Type:</strong> ${card.fuelType}</p>
+//                     <p><strong>Transmission:</strong>${card.transmission}</p>
+//                     <p><strong>Seating Capacity:</strong> ${card.seatingCapacity}</p>
+//                     <p><strong>Price:</strong> ${card.price}</p>
+//                     <p><strong>Owner:</strong> ${card.owner}</p>
+//                     <button class="more-info">More Info</button>
+//                 </div>
+//             </div>
+//         `;
+//     }).join('');
+//     cardsContainer.innerHTML = cardHtml;
+// }
 // function moreInfoPopup(){
 //     document.querySelector('.more-info').addEventListener('click',() => {
 //         document.querySelector('.more-info-popup').classList.add('show');
