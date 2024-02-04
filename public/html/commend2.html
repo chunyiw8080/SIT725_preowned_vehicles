@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<style type="text/css">
+			body{margin:0;}
+			#talk{
+                width: 742px;
+				height: 536px;
+				border:1px rgb(12, 6, 6) solid;
+			}	
+			#show{
+				width:98%;
+				height:65%;
+				border:1px rgb(6, 20, 6)  solid;
+				margin:10px auto auto;
+				overflow-y:auto;
+			}
+			#write{
+				width:98%;
+				height: 25%;
+				border:1px rgb(8, 8, 53) solid;
+				margin:10px auto auto;
+			}
+			.btn{
+				width: 50px;
+			    height: 25px;
+				margin: 2px auto auto 90%;
+			}
+			.personal{
+				width:99%;
+				height: 50px;
+				border:1px #886118 solid;
+				margin:2px auto;
+				overflow-y:auto;
+			}
+		</style>
+		<script type="text/javascript">			
+			function  add()
+			{
+				var content=$("te").value;
+				content=trim(content);
+				if(content.length<1)
+				{
+					alert("Please leave your comments");
+					return;
+				}
+				$("te").value="";
+				var myDate = new Date();
+				var year=myDate.getFullYear();    
+				var month=myDate.getMonth();       
+				var day=myDate.getDate();  
+				var timeNow=year+"/"+month+"/"+day;
+                //var user=getuserid()				
+				var  w="<pre  style='display:inline;'>"+timeNow+"<br/>"+content+"</pre>";						
+				var newDiv=document.createElement("div");
+				newDiv.className="personal";
+				newDiv.innerHTML=w;
+				var s=$("show");
+				$("show").appendChild(newDiv);
+				s.scrollTop = s.scrollHeight;
+			}
+		function $(id){
+			return document.getElementById(id);
+		    }
+		function trim(str){ 
+          return str.replace(/(^\s*)|(\s*$)/g, "");
+            }
+		</script>
+	</head>	
+	<body>
+		<div id="talk">
+			<div id="write">
+						<textArea   id="te" style="margin: auto auto; width:100%;height:79%;"></textArea>
+						<input type="button" value="Post" class="btn" onclick="add()">				
+			</div>
+            <div id="show"></div>
+		</div>
+	<body>
+</html>
