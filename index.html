@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css">
+<!-- slick Carousel CDN -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
+</head>
+
+<body>
+    
+    <div class="container">
+        <h1>Biggest Car Sale</h1>
+        <div class="top-part">
+           <img src="https://i.postimg.cc/VvKHCNWT/Webp-net-resizeimage-2.jpg"/>
+        </div>
+        <div class="bottom-part">
+            <button class="click-me-btn">Click Me to Post Advertisment</button>
+
+
+            <div class=".form-div">
+                <form class="main-form" action="" method="post" target="_blank">
+                                <button class="hide-form">X</button>
+                                    
+                    <div>
+                        <label for="carMake">Car Maker</label>
+                        <select id="carMake" name="carMake" required>
+                            <option value="" disabled selected>Select a car make</option>
+                            
+                        </select>
+
+                        <label for="carModel">Car Model:</label>
+                        <select id="carModel" name="carModel" required>
+                            <option value="" disabled selected>Select a car model</option>
+                            
+                        </select>
+
+                        <label for="year">Year:</label>
+                        <select id="year" name="year" required>
+                            <option value="" disabled selected>Select a year</option>
+                            
+                        </select>
+
+                        <label for="km">KM:</label>
+                        <input type="number" id="km" name="km" required>
+
+                        <label for="rego">Rego:</label>
+                        <input type="text" id="rego" name="rego" pattern="[A-Za-z0-9]+" required>
+
+                        <label for="postCode">Post Code:</label>
+                        <input type="number" id="postCode" name="postCode" pattern="\d{4}" maxlength="4" required>
+
+                        <label for="price">Price</label>
+                        <input type="number" id="price" name="price" required>
+
+                    </div>
+
+                
+                    <div>
+                
+                        <label for="seatingCapacity">Seating Capacity:</label>
+                        <select id="seatingCapacity" name="seatingCapacity" required>
+                            <option value="" disabled selected>Select seating capacity</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                            <option value="7">7</option>
+                        </select>
+
+                        <label for="fuelType">Fuel Type:</label>
+                        <select id="fuelType" name="fuelType" required>
+                            <option value="" disabled selected>Select fuel type</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="lpg">LPG</option>
+                            <option value="electric">Electric</option>
+                        </select>
+
+                        <label for="transmission">Transmission:</label>
+                        <select id="transmission" name="transmission" required>
+                            <option value="" disabled selected>Select transmission type</option>
+                            <option value="auto">Auto</option>
+                            <option value="manual">Manual</option>
+                        </select>
+
+                        <label for="maxPower">Max Power:</label>
+                        <input type="number" id="maxPower" name="maxPower" required>
+
+                        <label for="torque">Torque:</label>
+                        <input type="number" id="torque" name="torque" required>
+
+                        <label for="sellerType">Seller Type:</label>
+                        <select id="sellerType" name="sellerType" required>
+                            <option value="" disabled selected>Select seller type</option>
+                            <option value="individual">Individual</option>
+                            <option value="dealer">Dealer</option>
+                        </select>
+
+                        <label for="owner">Owner:</label>
+                        <select id="owner" name="owner" required>
+                            <option value="" disabled selected>Select owner</option>
+                            <option value="first">First</option>
+                            <option value="second">Second</option>
+                            <option value="third">Third</option>
+                            <option value="fourth_and_above">Fourth and above</option>
+                        </select>
+                    
+                    </div>
+
+                    
+                    <div style="grid-column: span 2;">
+                        
+                        <div id="imagePreviewContainer"></div>
+                        <label for="photos">Upload Photos:</label>
+                        <input type="file" id="photos" name="photos[]" accept="image/*" multiple onchange="previewImages(this)">
+                    </div>
+
+                    <button type="submit" class="submitForm"> Submit</button>
+                </form>
+            </div> 
+            <div class="cards-container">
+                
+            </div>
+            <div class="more-info-popup">
+                <div class="close-popup">X</div>
+                <div class="more-info-popup-main">
+                    <img src="C:\fakepath\Ben Greenfield .jpg" alt="Car Image">
+                    <h2>Car Information</h2>
+                    <p><strong>Make:</strong> Ford</p>
+                    <p><strong>Model:</strong> Everest</p>
+                    <p><strong>Fuel Type:</strong> Petrol</p>
+                    <p><strong>KM:</strong> 99</p>
+                    <p><strong>Max Power:</strong> 85</p>
+                    <p><strong>Owner:</strong> Second</p>
+                    <!-- Add other information here -->
+                    <p><strong>Year:</strong> 2024</p>
+                    <p><strong>Transmission:</strong> Manual</p>
+                    <!-- Add other information here -->
+                    <p><strong>Price:</strong> $99</p>
+                    <p><strong>Registration:</strong> MK</p>
+                    <p><strong>Seating Capacity:</strong> 2</p>
+                    <p><strong>Seller Type:</strong> Individual</p>
+                    <p><strong>Torque:</strong> 94</p>
+                    <p><strong>Post Code:</strong> 95</p>
+                </div>
+            </div>
+           
+        </div>
+
+    </div>
+ 
+    <script src="/script.js"></script>
+</body>
+</html>
