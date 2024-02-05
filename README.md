@@ -18,7 +18,7 @@
 
 <div align="center">
 
-  **[Demo](http://tridiamond.tech)** |
+  **[Demo](demo.freelytomorrow.com)** |
   **[Showcase Video](https://youtube.com)**
 </div>
 
