@@ -1,0 +1,329 @@
+.main-form {
+    display: none;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 500px;
+    overflow: scroll;
+    width: 500px;
+}
+
+.main-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.main-form select,
+.main-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.submitForm{
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submitForm:hover {
+    background-color: #45a049;
+}
+
+#m_imagePreviewContainer {
+    margin-bottom: 12px;
+}
+
+/* Optional: Style the "hide form" button */
+.hide-form {
+    background-color: #f44336;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.hide-form:hover {
+    background-color: #d32f2f;
+}
+
+.main-form.show{
+    display: block;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.top-part{
+    width: 670px;
+    height: 200px;
+}
+.top-part img{
+    width: 100%;
+    height: 100%;
+}
+
+/* Basic button styling */
+.click-me-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect */
+.click-me-btn:hover {
+   
+
+    
+}
+.click-me-btn:active {
+    transform: scale(0.85);
+   
+}
+
+.bottom-part{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#imagePreviewContainer{
+    height: 250px;
+    max-width: 100%;
+}
+#imagePreviewContainer img{
+    width: 100%;
+    height: 100%;
+}
+
+
+  .cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+
+    .card {
+        max-width: 400px;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      
+      .card-info {
+        padding: 16px;
+      }
+      
+      .card-info h2 {
+        margin-top: 0;
+        color: #333;
+      }
+      
+      .card-info p {
+        margin: 8px 0;
+        color: #666;
+      }
+      
+      strong {
+        color: #333;
+      }
+  }
+
+  .more-info-popup{
+    display: none;
+    height: 78vh;
+    border: 1px solid black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 75vw;
+    width: 100%;
+    text-align: center;
+    overflow: scroll;
+    padding: 35px;
+    img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+    
+      h2 {
+        color: #333;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+    
+       p {
+        color: #555;
+        font-size: 1em;
+        margin-bottom: 8px;
+      }
+
+      /* .slick-carousel {
+        margin: 0 auto;
+        width: 1000px;
+      }
+      
+      .slick-slide {
+        width: 350px;
+      }
+      
+      .slick-next::before, .slick-prev::before {
+        color: blue;
+      } */
+
+      
+      
+  }
+  .more-info-popup.show{
+    display: block;
+  }
+  .close-popup{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+  }
+  .card {
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .more-info-popup-main img,.card img {
+    height: 500px;
+    object-fit: cover;
+  }
+  
+  .card-info {
+    padding: 16px;
+  }
+  
+  .card-info h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .card-info p {
+    margin: 8px 0;
+    color: #666;
+  }
+  
+  strong {
+    color: #333;
+  }
+
+
+.expertPrevfvt{
+  background-color: black;
+  display: inline-block;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.expertNextfvt{
+  background-color: black;
+    display: inline-block;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.img-wrapper{
+  display: flex !important;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.more-info {
+  /* Basic button styles */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  /* Hover effect */
+  transition: background-color 0.3s ease;
+}
+
+.more-info:hover {
+  background-color: #2980b9;
+}
+
+/* Additional styles if needed */
+.more-info:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.7); /* Add a subtle box shadow on focus */
+}
+.form-div{
+  position: relative;
+}
+.hide-form{
+  position: absolute;
+    right: 5px;
+    top: 5px;
+
+}
+
+
+body.overlay::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+body.overlay{
+  overflow: hidden;
+
+}
+
+
+
+
+ 
+
+ 
