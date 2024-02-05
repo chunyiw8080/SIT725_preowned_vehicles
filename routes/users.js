@@ -8,6 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../db/crud');
 const model = require('../dataModels/userModel');
 const authentication = require('../middleware/authentication');
+const { log } = require('console');
 
 /** Module Instantiation */
 var router = express.Router();
@@ -85,15 +86,60 @@ router.get('/profile', authentication.login, async function(req, res){
   return res.status(200).send(data);
 });
 
-router.get('/logout', authentication.login, function(req, res){
+
+/**
+ * Update user profile
+ * Authenticates the user again before updating their profile
+ */
+router.post('/update', authentication.login, async function(req, res){
+  console.log(req);
+  // Extract values from request body, make sure these field names match with your frontend
+  const { username, email, phone, password, uuid } = req.body;
+
+  // console.log(email);
+  // console.log(phone);
+  // console.log(password);
+  // console.log(uuid);
+
+  try{
+      // Search user by uuid, once confirmed the correct user, proceed to update process
+      let data = await db.findRecords(model, {uuid: uuid}, model.findOne, null);
+      
+
+      if(data){
+          // Prepare the new information object
+          let updateInfo = {};
+          if(username) updateInfo.username = username;
+          if(email) updateInfo.email = email;
+          if(phone) updateInfo.phone = phone;
+          if(password) updateInfo.password = password;
+
+          // Call your update function from `db` module
+          // Assume it follows this signature: updateRecord(TargetModel, conditionObject, updateObject)
+          await db.updateRecords(model, {uuid: uuid}, model.updateOne, updateInfo);
+          res.status(200).json({message: 'Profile updated successfully!'});
+      }
+      else {
+          // If user not found
+          // console.log(res);
+          res.status(500).send("User not found 用户没找到"); 
+      }
+  }catch(err){
+      console.log(err);
+      res.status(500).send("Internal server error");
+  }
+});
+
+
+router.post('/logout', authentication.login, function(req, res){
   try{
     req.session.destroy();
     if(!req.session){
-      return res.send('You have logged out');
+      return res.status(205).send("Logout");
     }
   }catch(err){
     console.log(err);
-    return res.status(500).send('Internal Server Error');
+    res.status(500).send('Internal Server Error');
   }
   
 });

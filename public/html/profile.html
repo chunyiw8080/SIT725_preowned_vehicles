@@ -4,24 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>profile</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <link
       rel="stylesheet"
       type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      href="../stylesheets/bootstrap.min.css"
     />
     <script
       type="text/javascript"
-      src="//code.jquery.com/jquery-3.3.1.slim.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+      src="../javascripts/bootstrap.bundle.min.js"
     ></script>
     <link
       rel="stylesheet"
       type="text/css"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="../stylesheets/font-awesome.min.css"
     />
+    <script src="https://cdn.bootcss.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="../javascripts/md5.min.js"></script>
     <style lang="">
       .profile-header {
         transform: translateY(5rem);
@@ -63,7 +62,7 @@
             </li>
             <li class="nav-item">
               <div class="nav-link">
-                <a href="/html/profile.html">Profile</a>
+                <a href="./newProfile.html">Profile</a>
               </div>
             </li>
             <li class="nav-item">
@@ -83,6 +82,76 @@
       <div class="col-lg-7 mx-auto text-white text-center pt-5"></div>
     </div>
 
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="editProfileForm">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Enter phone number">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Edit Post Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit Post</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="editForm">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="post-content">Post Title</label>
+                <input type="text" class="form-control" id="post-title" placeholder="Enter new post title">
+              </div>
+              <div class="form-group">
+                <label for="post-content">Post Content</label>
+                <input type="text" class="form-control" id="post-content" placeholder="Enter new post content">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
 
     <div class="row py-5 px-4">
       <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
@@ -92,18 +161,18 @@
             <div class="media align-items-end profile-header">
               <div class="profile mr-3">
                 <img
-                  src="/images/userProfile.jpg"
+                  src="../images/userProfile.jpg"
                   alt="..."
                   width="130"
                   class="rounded mb-2 img-thumbnail"
-                /><a href="#" class="btn btn-dark btn-sm btn-block"
-                  >Edit profile</a
-                >
+                />
+                <a href="#" class="btn btn-dark btn-sm btn-block" data-toggle="modal" data-target="#editProfileModal">Edit profile</a>
               </div>
               <div class="media-body mb-5 text-white">
-                <h4 class="mt-0 mb-0">Jimmy</h4>
+                <h4 class="mt-0 mb-0" id="uname"></h4>
                 <p class="small mb-4">
-                  <i class="fa fa-id-card-o mr-2"></i>ID:12345678
+                  <i class="fa fa-id-card-o mr-2"></i>ID:<span id="id"></span>
+                  <div id="uuid" style="display: none;"></div>
                 </p>
               </div>
             </div>
@@ -112,7 +181,7 @@
           <div class="bg-light p-4 d-flex justify-content-end text-center">
             <ul class="list-inline mb-0">
               <li class="list-inline-item">
-                <h5 class="font-weight-bold mb-0 d-block">128</h5>
+                <h5 class="font-weight-bold mb-0 d-block" id="post_num">0</h5>
                 <small class="text-muted">
                   <i class="fa fa-newspaper-o mr-1"></i>Posts</small
                 >
@@ -123,35 +192,17 @@
           <div class="py-4 px-4">
             <div class="py-4">
               <h5 class="mb-3">My Posts</h5>
-              <!-- post 1 -->
-              <div class="card mb-4">
-                <div class="card-body">
-                  <h5 class="card-title">Article Title 1</h5>
-                  <p class="card-text">This is an introduction to the article...</p>
-                </div>
-              </div>
-              <!-- post 2 -->
-              <div class="card mb-4">
-                <div class="card-body">
-                  <h5 class="card-title">Article Title 2</h5>
-                  <p class="card-text">This is an introduction to the article...</p>
-                </div>
-              </div>
-              <!-- post 3 -->
-              <div class="card mb-4">
-                <div class="card-body">
-                  <h5 class="card-title">Article Title 3</h5>
-                  <p class="card-text">This is an introduction to the article...</p>
-                </div>
-              </div>
-              <!-- post 4 -->
-              <div class="card mb-4">
-                <div class="card-body">
-                  <h5 class="card-title">Article Title 4</h5>
-                  <p class="card-text">This is an introduction to the article...</p>
-                </div>
-              </div>
 
+              <div class="post-container">
+                <!-- post1 -->
+                <!-- <div class="card mb-4">
+                  <div class="card-body">
+                    <h5 class="card-title">Article Title 1</h5>
+                    <p class="card-text">This is an introduction to the article...</p>
+                  </div>
+                </div> -->
+              </div>
+              
             </div>
           </div>
         </div>
@@ -159,3 +210,4 @@
     </div>
   </body>
 </html>
+<script src="../javascripts/profile.js"></script>

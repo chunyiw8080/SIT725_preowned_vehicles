@@ -43,6 +43,24 @@ router.get('/getallposts', async function(req,res){
 });
 
 /**
+ * Receive front-end requests and return all posts by author
+ */
+router.get('/getpostsbyauthor/:uuid', async function(req, res) {
+    try {
+        let sort = req.query.sort ? req.query.sort : -1; // Get sort from query parameters
+        let uuid = req.params.uuid; // Get uuid from route parameters
+        if (!uuid) {
+            return res.status(400).send("Missing uuid in request");  // No uuid provided
+        }
+        const data = await db.findRecords(model, {status: 1, uuid: uuid}, model.find, {post_date: sort});
+        return res.json(data);
+    } catch(err) { 
+        console.log(err);
+        return res.status(500).send("Internal Server Error");
+    }
+});
+
+/**
  * Page to show all posts
  */
 router.get('/',(req, res) => {
@@ -121,6 +139,46 @@ router.delete('/:id', postVerfication, async function(req, res){
     }
     
 });
+
+
+/**
+ * Posts delete in profiles
+ */
+router.delete('/del/:id', async (req, res) => {
+    try {
+        const result = await db.deleteRecords(model, {_id: req.params.id}, model.deleteOne);
+        if(result.deletedCount > 0) {
+            res.status(200).json({message: "Post deleted successfully"});
+        } else {
+            res.status(404).json({message: "No post found with the given id"});
+        }
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({message: "An error occurred while deleting the post"});
+    }
+});
+
+
+/**
+ * Posts edit in profiles
+ */
+router.put('/edit/:id', async (req, res) => {
+    const updatedData = req.body;
+    try {
+        const result = await db.updateRecords(model, {_id: req.params.id}, model.updateOne, updatedData);
+        
+        
+        if (!result) {
+            return res.status(404).json({message: 'No post found with the given id'});
+        }
+        
+        res.status(200).json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: 'An error occurred while updating the post'});
+    }
+});
+
 
 /**
  * Allow user to update their post.
