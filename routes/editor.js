@@ -1,10 +1,11 @@
 const express = require('express');
 const path = require('path');
+const authentication = require('../middleware/authentication');
 
 const router = express.Router();
 var formData;
 
-router.get('/', (req,res) => {
+router.get('/', authentication.login, (req,res) => {
     res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'editor.html'));
 });
 

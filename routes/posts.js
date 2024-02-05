@@ -39,7 +39,7 @@ router.get('/getallposts', async function(req,res){
     }catch(err){
         console.log(err);
         return res.status(500).send("Internal Server Error");
-    }
+    }  
 });
 
 /**
@@ -54,7 +54,7 @@ router.get('/',(req, res) => {
  * upload.array: 10 images maximum to be uploaded
  * Images will be upload to the local folder: /public/userUploads, once successfully upload, the images' url will be store in the DB.
  */ 
-router.post('/new',  upload.array('image', 10), async function(req, res) {
+router.post('/new',  authentication.login, upload.array('image', 10), async function(req, res) {
     console.log('files: ', req.files);
     console.log('req.body: ', req.body);
   
@@ -92,7 +92,7 @@ router.post('/new',  upload.array('image', 10), async function(req, res) {
 /**
  * Posts detailed page
  */
-router.get('/:id', async function(req, res){
+router.get('/:id', authentication.login, async function(req, res){
     let id = req.params.id;
     try{
         const data = await db.findRecords(model, {_id: id}, model.findById, null);
@@ -127,7 +127,7 @@ router.delete('/:id', postVerfication, async function(req, res){
  * Get current post data and return to the editor.
  * -------------------- (Use verfication middleware after frontend page is done) ------------------------
  */
-router.patch('/update/:id', async function(req, res){
+router.patch('/update/:id', postVerfication, async function(req, res){
     let id = req.params.id;
     try{
         const data = await db.findRecords(model, {_id: id}, model.findById, null);
@@ -153,6 +153,5 @@ router.get('/userposts', (req, res) => {
         return res.status(500).send('Internal server error');
     }   
 });
-
 
 module.exports = router;

@@ -85,15 +85,15 @@ router.get('/profile', authentication.login, async function(req, res){
   return res.status(200).send(data);
 });
 
-router.post('/logout', authentication.login, function(req, res){
+router.get('/logout', authentication.login, function(req, res){
   try{
     req.session.destroy();
     if(!req.session){
-      return res.status(205).send("Logout");
+      return res.send('You have logged out');
     }
   }catch(err){
     console.log(err);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
   
 });

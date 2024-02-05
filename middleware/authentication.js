@@ -26,9 +26,11 @@ async function register(req, res, next){
  * Middleware for verifying user login status
  */
 function login(req, res, next){
-    if(!req.session){
-        return res.status(403).send('Not login');
+    if(!req.session.uuid){
+        // return res.status(403).send('Not login');
+        return res.redirect('/users/login');
     }else{
+        console.log('session');
         next();
     }
 }

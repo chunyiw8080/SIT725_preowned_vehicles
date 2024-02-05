@@ -5,7 +5,7 @@ const model = require('../dataModels/postModel');
  * Get user uuid from session and post data, if the two uuid are same, pass control to the next method.
  */
 module.exports = async function(req, res, next){
-    if(!req.session){
+    if(!req.session.uuid){
         return res.status(403).send('Not login');
     }
 
