@@ -96,7 +96,8 @@ router.get('/:id', async function(req, res){
     let id = req.params.id;
     try{
         const data = await db.findRecords(model, {_id: id}, model.findById, null);
-        return res.send(data);
+        console.log(data);
+        return res.render('post', {data: data});
     }catch(err){
         console.log(err);
         return res.status(500).send("Internal Server Error");
@@ -126,8 +127,31 @@ router.delete('/:id', postVerfication, async function(req, res){
  * Get current post data and return to the editor.
  * -------------------- (Use verfication middleware after frontend page is done) ------------------------
  */
-router.patch('/:id', async function(req, res){
+router.patch('/update/:id', async function(req, res){
+    let id = req.params.id;
+    try{
+        const data = await db.findRecords(model, {_id: id}, model.findById, null);
+        return res.json(data);
+    }catch(err){
+        console.log(err);
+        return res.status(500).send('Internal Server Error');
+    }
+    
+});
 
+router.get('/userposts', (req, res) => {
+    let uuid = req.session.uuid;
+    try{
+        if(uuid){
+            const data = db.findRecords(model, {uuid: uuid}, model.find, null);
+            return res.status(200).json(data);
+        }else{
+            return res.status(403).send('Not logged in');
+        }
+    }catch(err){
+        console.log(err);
+        return res.status(500).send('Internal server error');
+    }   
 });
 
 

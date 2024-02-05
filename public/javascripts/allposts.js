@@ -1,11 +1,11 @@
 
-document.querySelector('.click-me-btn').addEventListener('click',() => {
-    document.querySelector('.main-form').classList.add('show');
-})
-document.querySelector('.hide-form').addEventListener('click',(e) => {
-     e.preventDefault();
-    document.querySelector('.main-form').classList.remove('show');
-})
+// document.querySelector('.click-me-btn').addEventListener('click',() => {
+//     document.querySelector('.main-form').classList.add('show');
+// })
+// document.querySelector('.hide-form').addEventListener('click',(e) => {
+//      e.preventDefault();
+//     document.querySelector('.main-form').classList.remove('show');
+// })
 
 
 //Receive posts data from backend and render the post cards
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded',function(){
                         <p><strong>Seating Capacity: </strong> ${card.seats}</p>
                         <p><strong>Price:</strong> ${card.price}</p>
                         <p><strong>Owner:</strong> ${card.owner}</p>
-                        <button class="more-info">More Info</button>
+                        <a href="/posts/${card._id}"><button class="more-info">More Info</button></a>
                     </div>
                 </div>
             `;
