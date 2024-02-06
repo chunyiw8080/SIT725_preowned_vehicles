@@ -68,7 +68,10 @@ router.post('/register', authentication.register, async (req, res) => {
   let uuid = uuidv4();
   try{
     let now = new Date();
-    const data = await db.createNewRecord(model, {...req.body, username: username, password: req.body.password, uuid: uuid, reg_date: moment(now).toDate()});
+    const data = await db.createNewRecord(
+      model, 
+      {...req.body, username: username, password: req.body.password, uuid: uuid, reg_date: moment(now).toDate()}
+    );
     console.log('reg data: ', data);
     return res.status(200).send('Success');
   }catch(err){
@@ -78,12 +81,19 @@ router.post('/register', authentication.register, async (req, res) => {
 });
 
 /**
- * Get user profile after verifying login status through session
+ * Get user data after verifying login status through session
  */
-router.get('/profile', authentication.login, async function(req, res){
+router.get('/getprofile', authentication.login, async function(req, res){
   let uuid = req.session.uuid;
   const data = await db.findRecords(model, {uuid: uuid}, model.findOne, null);
   return res.status(200).send(data);
+});
+
+/**
+ * Return profile page
+ */
+router.get('/profile', authentication.login, async function(req, res){
+  return res.sendFile(path.join(__dirname, '..' ,'public', 'html', 'profile.html'));
 });
 
 
@@ -122,7 +132,7 @@ router.post('/update', authentication.login, async function(req, res){
       else {
           // If user not found
           // console.log(res);
-          res.status(500).send("User not found 用户没找到"); 
+          res.status(500).send("User not found"); 
       }
   }catch(err){
       console.log(err);
@@ -131,11 +141,11 @@ router.post('/update', authentication.login, async function(req, res){
 });
 
 
-router.post('/logout', authentication.login, function(req, res){
+router.get('/logout', authentication.login, function(req, res){
   try{
     req.session.destroy();
     if(!req.session){
-      return res.status(205).send("Logout");
+      return res.redirect('/');
     }
   }catch(err){
     console.log(err);

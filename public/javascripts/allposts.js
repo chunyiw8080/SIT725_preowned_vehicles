@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded',function(){
                         <p><strong>Seating Capacity: </strong> ${card.seats}</p>
                         <p><strong>Price:</strong> ${card.price}</p>
                         <p><strong>Owner:</strong> ${card.owner}</p>
-                        <a href="/posts/${card._id}"><button class="more-info">More Info</button></a>
+                        <a href="/posts/id/${card._id}"><button class="more-info">More Info</button></a>
                     </div>
                 </div>
             `;

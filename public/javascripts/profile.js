@@ -1,7 +1,7 @@
 //Read user information
 var uuid = "";
 var uid = "";
-fetch("/users/profile", {
+fetch("/users/getprofile", {
   method: "GET",
   credentials: "include", // Include cookies in the request
   headers: {
@@ -159,22 +159,14 @@ function deletePost(id) {
 // When the user clicks the Edit button, the modal window is displayed and the form is filled
 $(document).on("click", ".edit", function () {
   var id = $(this).data("id"); // Gets the value of the data-id attribute
-
-  // Gets the current content of the specified post to the server
-  fetch(`/posts/${id}`, { method: "GET" })
-    .then((response) => response.json())
-    .then((post) => {
-      // The form that fills the modal window
-      $("#post-title").val(post.title);
-      $("#post-content").val(post.content);
-
-      // Store the id on the form for later use
-      $("#editForm").data("id", id);
-
-      // Displays the modal window
-      $("#editModal").modal("show");
-    })
-    .catch((err) => console.error(err));
+  var button = document.querySelector('.edit');
+  var dataId = button.getAttribute('data-id');
+  if(dataId){
+    window.location.href = `/editor/update/${dataId}`;
+  }else{
+    alert('Something Wrong');
+  }
+  
 });
 
 

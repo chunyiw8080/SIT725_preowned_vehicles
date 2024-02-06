@@ -110,11 +110,11 @@ router.post('/new',  authentication.login, upload.array('image', 10), async func
 /**
  * Posts detailed page
  */
-router.get('/:id', authentication.login, async function(req, res){
+router.get('/id/:id', authentication.login, async function(req, res){
     let id = req.params.id;
     try{
         const data = await db.findRecords(model, {_id: id}, model.findById, null);
-        console.log(data);
+        // console.log(data);
         return res.render('post', {data: data});
     }catch(err){
         console.log(err);
@@ -122,6 +122,16 @@ router.get('/:id', authentication.login, async function(req, res){
     }
 });
 
+router.get('/api/:id', async (req, res) => {
+    let id = req.params.id;
+    try{
+        const data = await db.findRecords(model, {_id: id}, model.findById, null);
+        console.log(data);
+        return res.json(data);
+    }catch(err){
+        return res.status(500).send(err);
+    }
+})
 /**
  * Posts delete
  * Verify user permissions through middleware function, if pass, mark posts status as 1, which will not be showd on post list
@@ -162,22 +172,18 @@ router.delete('/del/:id', async (req, res) => {
 /**
  * Posts edit in profiles
  */
-router.put('/edit/:id', async (req, res) => {
-    const updatedData = req.body;
-    try {
-        const result = await db.updateRecords(model, {_id: req.params.id}, model.updateOne, updatedData);
-        
-        
-        if (!result) {
-            return res.status(404).json({message: 'No post found with the given id'});
-        }
-        
-        res.status(200).json(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({message: 'An error occurred while updating the post'});
-    }
-});
+// router.get('/edit/:id', async function(req, res){
+//     let id = req.params.id;
+//     console.log(id);
+//     try{
+//         const data = await db.findRecords(model, {_id: id}, model.findOne, null);
+//         console.log(data);
+//         return res.render('postupdate', {data: data});
+//     }catch(err){
+//         return res.status(500).send(err);
+//     }
+    
+// });
 
 
 /**
@@ -185,16 +191,17 @@ router.put('/edit/:id', async (req, res) => {
  * Get current post data and return to the editor.
  * -------------------- (Use verfication middleware after frontend page is done) ------------------------
  */
-router.patch('/update/:id', postVerfication, async function(req, res){
+router.post('/update/:id', postVerfication, async function(req, res){
     let id = req.params.id;
-    try{
-        const data = await db.findRecords(model, {_id: id}, model.findById, null);
-        return res.json(data);
-    }catch(err){
-        console.log(err);
-        return res.status(500).send('Internal Server Error');
+    let updateData = req.body;
+    for (let key in updateData) {
+        if (updateData[key] === null || updateData[key] === undefined) {
+            delete updateData[key];
+        }
     }
     
+    const data = await db.updateRecords(model, {_id: id}, model.updateOne, {...updateData});
+    return res.redirect(`/posts/id/${id}`);
 });
 
 router.get('/userposts', (req, res) => {

@@ -27,3 +27,18 @@ document.addEventListener('DOMContentLoaded',function(){
     });
 
 });
+
+$(document).ready(function() {
+    var data = localStorage.getItem('data');
+  
+    if (data) {
+        console.log(data);
+    //   $('#post-title').val(title);
+    //   localStorage.removeItem('postTitle'); // 清除已使用的数据
+    }
+  
+    // if (content) {
+    //   $('#post-content').val(content);
+    //   localStorage.removeItem('postContent'); // 清除已使用的数据
+    // }
+  });

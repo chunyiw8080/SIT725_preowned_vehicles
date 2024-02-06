@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Auto sell</title>
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -26,7 +25,7 @@
 <body onload="populateEmail()">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
         <div class="container">
-            <a href="/" class="navbar-brand">
+            <a href="#" class="navbar-brand">
                 Auto Sell
             </a>
 
@@ -46,11 +45,15 @@
                         <div class="nav-link"><a href="/">Home</a></div>
                     </li>
                     <li class="nav-item">
-                        <div class="nav-link"><a href="/users/profile">User Profile</a></div>
+                        <div class="nav-link"><a href="/posts">Posts</a></div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-link"><a href="/users/profile">Profile</a></div>
                     </li>
                     <li class="nav-item">
                         <div class="nav-link"><a href="/users/logout">Logout</a></div>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -59,82 +62,100 @@
 <div class="container"> 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form class="mt-5" id="post_form" enctype="multipart/form-data" >
+            <form class="mt-5" id="post_form" method="post" action="/posts/update/<%= data._id %>">
                 <br>
                 <br>
                 
                 <!-- Title -->
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Title" name="title">
+                    <input type="text" class="form-control" placeholder="Title" name="title" value="<%= data.title %>">
                 </div>
                 
                 <!-- Car Model -->
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Car model" name="car_model">
+                    <input type="text" class="form-control" placeholder="Car model" name="car_model" value="<%= data.car_model %>">
                 </div>
 
                 <!-- Year, Price, Seats, Mileage -->
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Year of manufacture" name="year">
+                        <input type="text" class="form-control" placeholder="Year of manufacture" name="year" value="<%= data.year %>">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Price" name="price" id="price">
+                        <input type="text" class="form-control" placeholder="Price" name="price" id="price" value="<%= data.price %>">
                     </div>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Seats" name="seats" id="seats">
+                        <input type="text" class="form-control" placeholder="Seats" name="seats" id="seats" value="<%= data.seats %>">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Drive kilometers" name="km_driven" id="km_driven">
+                        <input type="text" class="form-control" placeholder="Drive kilometers" name="km_driven" id="km_driven" value="<%= data.km_driven %>">
                     </div>
                 </div>
 
                 <!-- Fuel Type -->
                 <div class="mb-3 mt-3">
                     <select class="form-select" name="fuel" id="fuel">
-                        <option selected disabled>Fuel</option>
-                        <option value="Petrol">Petrol</option>
-                        <option value="Diesel">Diesel</option>
+                        <!-- <option selected disabled>Fuel</option> -->
+                        <% if(data.fuel === 'Petrol'){ %>
+                            <option selected value="Petrol">Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                        <% }else{ %>
+                            <option value="Petrol">Petrol</option>
+                            <option selected value="Diesel">Diesel</option>
+                        <% } %>
+                        
                     </select>
                 </div>
 
                 <!-- Transmission -->
                 <div class="mb-3">
                     <select class="form-select" name="transmission" id="transmission">
-                        <option selected disabled>Transmission</option>
-                        <option value="Automatic">Automatic</option>
-                        <option value="Manual">Manual</option>
+                        <!-- <option selected disabled>Transmission</option> -->
+                        <% if(data.transmission === 'Automatic') { %>
+                            <option selected value="Automatic">Automatic</option>
+                            <option value="Manual">Manual</option>
+                        <% }else{ %>
+                            <option value="Automatic">Automatic</option>
+                            <option selected value="Manual">Manual</option>
+                        <% } %>
+                        
                     </select>
                 </div>
 
                 <!-- Mileage, Engine, Max Power, Torque -->
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Mileage" name="mileage" id="mileage">
+                        <input type="text" class="form-control" placeholder="Mileage" name="mileage" id="mileage" value="<%= data.mileage %>">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Engine" name="engine" id="engine">
+                        <input type="text" class="form-control" placeholder="Engine" name="engine" id="engine" value="<%= data.engine %>">
                     </div>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Max power" name="max_power" id="max_power">
+                        <input type="text" class="form-control" placeholder="Max power" name="max_power" id="max_power" value="<%= data.max_power %>">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Torque" name="torque" id="torque">
+                        <input type="text" class="form-control" placeholder="Torque" name="torque" id="torque" value="<%= data.torque %>">
                     </div>
                 </div>
 
                 <!-- Seller Type -->
                 <div class="mb-3 mt-3">
                     <select class="form-select" name="seller_type" id="seller_type">
-                    <option selected disabled>Seller type</option>
-                    <option value="Individual">Individual</option>
-                    <option value="Dealer">Dealer</option>
+                    <!-- <option selected disabled>Seller type</option> -->
+                    <% if(data.seller_type === 'Individual'){ %>
+                        <option selected value="Individual">Individual</option>
+                        <option value="Dealer">Dealer</option>
+                    <% }else{ %>
+                        <option value="Individual">Individual</option>
+                        <option selected value="Dealer">Dealer</option>
+                    <% } %>
+                    
                     </select>
                     </div>
                     <!-- Number of Owners -->
@@ -150,17 +171,12 @@
 
                 <!--Phone number-->
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Tel" name="contact">
-                </div>
-
-                <!-- Updated images-->
-                <div class="mb-3">
-                    <input type="file" accept="image/*" name="image" multiple>
+                    <input type="text" class="form-control" placeholder="Tel" name="contact" value="<%= data.contact %>">
                 </div>
 
                 <!-- Description -->
                 <div class="mb-3">
-                    <textarea style="resize: none;" class="form-control" placeholder="Description" rows="10" name="content"></textarea>
+                    <textarea style="resize: none;" class="form-control" placeholder="Description" rows="10" name="content" ><%= data.content %></textarea>
                 </div>
 
                 <!-- Phone Number -->
@@ -174,8 +190,6 @@
         </div>
     </div>
 </div>
-<script src="/javascripts/editor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/javascripts/newPost.js"></script>
 </body>
 </html>

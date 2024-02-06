@@ -43,6 +43,7 @@ jumpBtnContainer.addEventListener('click', function(event){
             let formPreset = JSON.parse(formDataJsonString);
             formPreset.price = price;
             xhr.send(JSON.stringify(formPreset));
+            localStorage.setItem('formData', formDataJsonString);
             window.location.href = 'http://127.0.0.1:3000/editor'; 
         }catch(err){
             console.error(err);
