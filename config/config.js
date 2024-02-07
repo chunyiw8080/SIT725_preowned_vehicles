@@ -3,9 +3,9 @@
  *  secret: Session encryption key
  */
 module.exports = {
-    dbHost: 'localhost',
-    dbPort: '27017',
-    dbName: 'SIT725Project',
+    dbHost: process.env.DB_HOST || 'localhost',
+    dbPort: process.env.DB_PORT || '27017',
+    dbName: process.env.DB_NAME || 'SIT725Project',
     timezone: 'Australia/Melbourne',
     secret: 'sit725demo'
 }
