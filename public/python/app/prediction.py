@@ -12,7 +12,7 @@ class CarPriceModel:
 
 	def load_models(self):
 		# print("load_models")
-		model_dir = "public\python\models"
+		model_dir = "public/python/models"
 		self.onehot = joblib.load(f"{model_dir}/one_hot_encoder.joblib")
 		self.scaler = joblib.load(f"{model_dir}/standard_Scaler.joblib")
 		self.predictor = joblib.load(f"{model_dir}/random_model.joblib")

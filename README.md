@@ -18,12 +18,16 @@
 
 <div align="center">
 
-  **[Demo](demo.freelytomorrow.com)** |
   **[Showcase Video](https://youtube.com)**
 </div>
 
 Auto sell is a second-hand car trading platform that integrates AI price prediction and generates objective prices based on various technical indicators of the models sold by users. Car buyers and sellers can choose to meet offline to inspect their cars, reducing fraud and quality issues.
 
+🚀 How to **Deploy**
+```
+cd /project/path/docker
+docker-compose -f docker-compose up -d
+```
 🚀 How to **RUN**
 ```
 npm start
