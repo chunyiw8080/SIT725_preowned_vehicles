@@ -13,7 +13,7 @@ if(btn){
         console.log(formDataJsonString);
     
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://127.0.0.1:3000/valuation');
+        xhr.open('POST', '/valuation');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(formDataJsonString);
         xhr.onreadystatechange = function(){

@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
     const jsonString = JSON.stringify(formData);
 
     // execute python script
-    const pythonProcess = exec('python' + ' ' + scriptPath + ' ' + jsonString, function(err, stdout, stderr){
+    const pythonProcess = exec('python3' + ' ' + scriptPath + ' ' + jsonString, function(err, stdout, stderr){
         if(err){
             console.log(err);
             res.status(500).send('Internal Server Error');
