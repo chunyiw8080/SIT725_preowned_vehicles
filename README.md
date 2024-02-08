@@ -1,10 +1,10 @@
 <div align="center">
   <a href="https://tridiamond.tech" target="_blank" rel="noopener noreferrer">
-    <img width="450" alt="image" src="https://www.freelytomorrow.com/images/tmp/posts.png">
+    <img width="450" alt="image" src="https://www.freelytomorrow.com/images/tmp/logo.jpg">
   </a>
   <br/>
   <h1> <b> Auto Sell </b></h1>
-  <strong>C2C's automotive trading platform</strong>
+  <strong>C2C's pre-owned vehicle trading platform</strong>
 </div>
 
 <br/>
@@ -18,17 +18,18 @@
 
 <div align="center">
 
-  **[Showcase Video](https://youtube.com)**
+  **[Showcase Video](https://youtu.be/DQRu-w9L99M)**
 </div>
 
 Auto sell is a second-hand car trading platform that integrates AI price prediction and generates objective prices based on various technical indicators of the models sold by users. Car buyers and sellers can choose to meet offline to inspect their cars, reducing fraud and quality issues.
 
-🚀 How to **Deploy**
-```
+##### 🚀 Use **Docker** for containerized deployment
+``` bash
 cd /project/path/docker
-docker-compose -f docker-compose up -d
+docker-compose -f docker-compose.yml up -d
 ```
-🚀 How to **RUN**
+##### 🚀 Running program in the Linux/Windows system
+Under the root directory, execute: 
 ```
 npm start
 ```
@@ -38,13 +39,17 @@ npm start
 ## Screenshots
 ![Home Page](https://www.freelytomorrow.com/images/tmp/index.png)
 
-![Posts](https://www.freelytomorrow.com/images/tmp/posts.png)
+![Post list](https://www.freelytomorrow.com/images/tmp/posts.png)
 
 ![Valuation](https://www.freelytomorrow.com/images/tmp/valuation.png)
 
 ![User Login](https://www.freelytomorrow.com/images/tmp/login.png)
 
 ![User Register](https://www.freelytomorrow.com/images/tmp/register.png)
+
+![User Profile](https://www.freelytomorrow.com/images/tmp/user_profile.png)
+
+![Post detail page](https://www.freelytomorrow.com/images/tmp/deatil_post.png)
 
 
 
@@ -64,15 +69,16 @@ npm start
 - /posts : The page to show all posts
 - /getallposts: The interface to return posts data to the front-end.
 - /posts/new: The interface to receive post data sent from .front-end, data will be wrote in the database.
-- /posts/:id (GET) : Return all data of a specific post to the front-end.
-- /posts/:id (DELETE): Delete the specific post based on the post id.
-- /posts/:id (PATCH): Allow users to update the posts they have posted.
+- /posts/id/:id (GET) : Return all data of a specific post to the front-end.
+- /posts/del/:id (DELETE): Delete the specific post based on the post id.
+- /posts/update/:id (POST): Allow users to update the posts they have posted.
 
 ### ⭐️ Valuation related routes
 - /valuation: Vehicle valuation method: The form data sent by the front-end will be routed here, and then a Python subprocess will be generated to execute the Python valuation script. Finally, the price will be returned to the front-end step by step
 
 ### ⭐️ Editor routes
-- /editor: Reusable editor page for creating new posts and updating post operations
+- /editor: Editor page for users to create new post
+- /editor/update/:id : Editor page for users to update their exists posts.
 
 <hr>
 
@@ -86,7 +92,8 @@ npm start
 When users update or delete posts, perform permission verification by comparing the uuid in the session with the uuid in the post data. If they are the same, the operation can be performed
 
 ## 🏳️‍🌈 db
-Code for connect and CRUD the Mongo database
+- db: Code used to connect to MongoDB
+- CRUD: Data create, read, update and delete methods.
 
 ## 🏳️‍🌈 Valuation resources
 - Valuation script: /public/python/app/prediction.py
@@ -97,9 +104,9 @@ Code for connect and CRUD the Mongo database
 ### 🛠 Configuration
 - General configuration: **/config/config.js**
 ``` js
-    dbHost: 'localhost',
-    dbPort: '27017',
-    dbName: 'SIT725Project',
+    dbHost: process.env.DB_HOST || 'localhost',
+    dbPort: process.env.DB_PORT || '27017',
+    dbName: process.env.DB_NAME || 'SIT725Project',
     timezone: 'Australia/Melbourne',
     secret: 'sit725demo' //secret used to encrypted user session
 ```
@@ -119,7 +126,10 @@ app.use(session({
 
 ## 🚀 What is yet to come?
 
-undefined
+- Users comments function
+- Payment gateway
+- Realtime livechat
+- Users profile avatar upload and edit
 
 ## 🏆 Project Contributors
 

@@ -136,25 +136,25 @@ router.get('/api/:id', async (req, res) => {
  * Posts delete
  * Verify user permissions through middleware function, if pass, mark posts status as 1, which will not be showd on post list
  */
-router.delete('/:id', postVerfication, async function(req, res){
-    let uuid = req.session.uuid;
-    let id = req.params.id;
-    try{
-        const del = await db.updateRecords(model, {_id: id, uuid: uuid}, model.updateOne, {status: 0});
-        console.log(del);
-        return res.status(200).send("Post has been deleted");
-    }catch(err){
-        console.log(err);
-        return res.status(500).send("Internal Server Error");
-    }
+// router.delete('/:id', postVerfication, async function(req, res){
+//     let uuid = req.session.uuid;
+//     let id = req.params.id;
+//     try{
+//         const del = await db.updateRecords(model, {_id: id, uuid: uuid}, model.updateOne, {status: 0});
+//         console.log(del);
+//         return res.status(200).send("Post has been deleted");
+//     }catch(err){
+//         console.log(err);
+//         return res.status(500).send("Internal Server Error");
+//     }
     
-});
+// });
 
 
 /**
  * Posts delete in profiles
  */
-router.delete('/del/:id', async (req, res) => {
+router.delete('/del/:id', postVerfication, async (req, res) => {
     try {
         const result = await db.deleteRecords(model, {_id: req.params.id}, model.deleteOne);
         if(result.deletedCount > 0) {
